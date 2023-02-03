@@ -2,14 +2,13 @@
 import React from "react"
 import Dashboard from '../components/Dashboard/Dashboard';
 import Index from "../components/Index/Index";
-import Profile from "../components/Profile/Profile"
-import Users from "../components/Users/Users"
 import Teachers from "../components/Teachers/Teachers"
 import Students from "../components/Students/Students"
 import Error from "../components/Error/Error"
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute"
 import { createBrowserRouter } from 'react-router-dom';
-
+import Users from "../components/Users/Users";
+import Profile from "../components/Profile/Profile"
 
 
 const router = createBrowserRouter([
@@ -34,10 +33,13 @@ const router = createBrowserRouter([
                             {
                                 path: "profile",
                                 element: <Profile />,
+                                
                             },
                             {
                                 path: "users",
-                                element: <Users />
+                                element: <Users />,
+                                
+
                             },
                             {
                                 path: "teachers",

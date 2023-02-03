@@ -1,52 +1,41 @@
-import { Outlet, Link } from "react-router-dom"
+import React from "react"
 import Login from "../Login/Login"
 import useToken from "../useToken/useToken"
+import AdminScreen from "../Screens/AdminScreen"
+import TeacherScreen from "../Screens/TeacherScreen"
+
+
 
 
 function Dashboard() {
 
-    const {token, setToken, decodedToken,isExpired}= useToken()
-    console.log(decodedToken)
+  
+
+    const { token, setToken, isExpired, decodedToken} = useToken()
 
     
-
-    if(!token || isExpired){
+    if (!token || isExpired) {
         return (
             <>
-        <Login setToken={setToken}/>
-        
-        
-        </>
+                <Login setToken={setToken} />
+
+            </>
         )
     }
 
-    if (decodedToken.user.type==="admin"){
-        
+
+
+    let type = decodedToken.user.type
+    if (type === "admin") {
+        return (
+           <AdminScreen/>
+        )
+    } else if (type === "teacher") {
+        return (
+            <TeacherScreen/>
+        )
     }
-    return (
-        <>
-            <div id="sidebar">
-                <h1>React router veridas</h1>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to={"./profile"}>Profile</Link>
-                        </li>
-                        <li>
-                            <Link to={"./users"}>Users</Link>
-                        </li>
-                        <li>
-                            <Link to={"./teachers"}>Teachers</Link>
-                        </li>
-                        <li>
-                            <Link to={"./students"}>Students</Link>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div id="detail"><Outlet /></div>
-        </>
-    )
+
 }
 
 export default Dashboard
