@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import StudentsTable from "./StudentsTable"
-import useToken from "../useToken/useToken"
+import { useLoaderData } from "react-router-dom"
+import { getToken, decodedToken } from "../../utils"
 
 
-async function getStudents(token, id) {
+export async function loader() {
 
-    const url = "https://localhost:1443/api/teacher/"+ id +"/students";
+    const token = getToken()
+    const decoded = await decodedToken(token)
+    const id = decoded.user.id
+
+    const url = "https://localhost:1443/api/teacher/" + id + "/students";
     const options = {
         method: "GET",
         headers: {
@@ -13,42 +18,43 @@ async function getStudents(token, id) {
             Authorization: "Bearer " + token,
         },
     }
-    return fetch(url, options)
-        .then((res) => res.json())
-        
+    let usersApi = await fetch(url, options);
+    usersApi = await usersApi.json()
+    console.log(usersApi)
+    const users = usersApi.map((user) => {
+        return {
+            name: user.name,
+            last_name: user.last_name,
+            dni: user.dni,
+            date_of_birth: user.date_of_birth,
+            createdAt: user.createdAt,
+        }
+    })
+
+    return users
+
 }
 
-export default function Users() {
+function Students() {
 
-    const { token, user } = useToken()
-    
-    const [students, setStudents] = useState([])
-    
+    const users = useLoaderData()
 
-    useEffect(() => {
+    const [students, setStudents] = useState(users)
 
-        const fetchData= async()=>{
-            if (user){
-                const userData=  await getStudents(token, user.id);
-                setStudents(userData||[])
-                
-                
-            }
-        }
-        fetchData()
-        
-    },[token, user])
 
-    const title= <h1>Your students</h1>
+
+
+    const title = <h1>Your students</h1>
 
 
     return (
         <>
-        {title}
-        <div className="container">  
-        <StudentsTable studentsData={students} />
-        </div>
+            {title}
+            <div className="container">
+                <StudentsTable studentsData={students} />
+            </div>
         </>
 
     )
 }
+export default Students

@@ -16,14 +16,14 @@ function TableHeader () {
 
 function TableBody(props){
 
-    const rows = props.userData.map((row, index) => {
+    const rows = props.peopleData.map((row, index) => {
         return (
-            <tr key={index}>
+            <tr key={row.id}>
                 <td>{row.id}</td>
                 <td>{row.email}</td>
                 <td>{row.type}</td>
                 <td>{row.active? "active": "inactive"}</td>
-                <td><button onClick={()=>props.removePeople(index)} >Delete</button></td>
+                <td><button onClick={()=>props.deleteUser(row.id)} >Delete</button></td>
             </tr >   
         )
 })
@@ -36,7 +36,7 @@ function UsersTable(props){
     return(
         <table>
         <TableHeader/>
-        <TableBody userData={props.userData}/>
+        <TableBody peopleData={props.peopleData} deleteUser= {props.deleteUser}/>
         </table>
         
     )

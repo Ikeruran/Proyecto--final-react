@@ -1,3 +1,16 @@
+import jwt_decode from "jwt-decode";
+
+function getToken() {
+    const tokenString = localStorage.getItem("token");
+    const userToken = JSON.parse(tokenString)
+    return userToken?.token;
+}
+
+async function decodedToken(token) {
+    const tokenDecoded =  await jwt_decode(token);
+    return tokenDecoded
+}
+
 function convertDate(rawDate) {
     let date = new Date(rawDate);
     let day = date.getDate();
@@ -7,4 +20,4 @@ function convertDate(rawDate) {
     return dateWithFormat
 }
 
-export {convertDate}
+export { convertDate, getToken, decodedToken}

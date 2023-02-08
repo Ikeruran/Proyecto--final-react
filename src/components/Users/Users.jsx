@@ -1,12 +1,15 @@
 
-import React, { useEffect, useState } from 'react';
 import UsersTable from "./UsersTable"
-import useToken from "../useToken/useToken"
+import { useLoaderData, Link } from "react-router-dom"
+import React, { useState } from 'react';
+import { getToken } from "../../utils"
 
 
-async function getUsers(token) {
 
-    const url = "https://localhost:1443/api/user/";
+export async function loader() {
+
+    const token = getToken()
+    const url = "https://localhost:1443/api/user";
     const options = {
         method: "GET",
         headers: {
@@ -14,39 +17,54 @@ async function getUsers(token) {
             Authorization: "Bearer " + token,
         },
     }
-    return fetch(url, options)
-        .then((res) => res.json())
-        
+    let usersApi = await fetch(url, options);
+    usersApi = await usersApi.json();
+    const users = usersApi.map((user) => {
+        return {
+            id: user.id,
+            email: user.email,
+            type: user.type,
+            active: user.active,
+        }
+    })
+    return users
 }
 
-export default function Users() {
+function Users() {
 
-    const { token } = useToken()
-    
-    const [users, setUsers] = useState([])
-    
+    const users = useLoaderData()
+    const [people, setPeople] = useState(users)
 
-    useEffect(() => {
-
-        const fetchData= async()=>{
-            if (token){
-                const userData=  await getUsers(token);
-                setUsers(userData||[])
-                
-                
-            }
+    async function deleteUser(id){
+        const token = getToken()
+        const url = `https://localhost:1443/api/user/${id}`;
+        const options = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
         }
-        fetchData()
-        
-    },[token])
-
-    const title= <h1>All users</h1>
-
+        let usersApi = await fetch(url, options);
+        usersApi = await usersApi.json();
+        const users = await usersApi.map((user) => {
+            return {
+                id: user.id,
+                email: user.email,
+                type: user.type,
+                active: user.active,
+            }
+        })
+       setPeople(users)   
+    }
 
     return (
         <div className="container">
-        <UsersTable userData={users} title={title}/>
+            <UsersTable peopleData={people} deleteUser={deleteUser} />
+            <Link to={"./signin"}><button className= "botones" > Add User</button></Link>
+            
         </div>
 
     )
 }
+export default Users

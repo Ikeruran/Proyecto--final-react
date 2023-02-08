@@ -1,14 +1,11 @@
 
 import {useState} from "react";
 import { useJwt } from "react-jwt"
+import {getToken} from "../../utils"
 
 export default function useToken(){
 
-    function getToken() {
-        const tokenString = localStorage.getItem("token");
-        const userToken = JSON.parse(tokenString)
-        return userToken?.token;
-    }
+    
 
     const [token, setToken] = useState(getToken())
     const { decodedToken, isExpired } = useJwt(token);
