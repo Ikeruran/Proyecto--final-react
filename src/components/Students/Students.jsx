@@ -23,6 +23,7 @@ export async function loader() {
     console.log(usersApi)
     const users = usersApi.map((user) => {
         return {
+            id:user.id,
             name: user.name,
             last_name: user.last_name,
             dni: user.dni,
@@ -41,6 +42,23 @@ function Students() {
 
     const [students, setStudents] = useState(users)
 
+    async function deleteStudent(id){
+        const token = getToken()
+        const url = `https://localhost:1443/api/student/${id}`;
+        const options = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+        let usersApi = await fetch(url, options);
+        usersApi = await usersApi.json();
+        if(usersApi.success){
+        const newUsers = users.filter(user=>user.id !==id)
+        setStudents(newUsers)}
+    }
+
 
 
 
@@ -51,7 +69,7 @@ function Students() {
         <>
             {title}
             <div className="container">
-                <StudentsTable studentsData={students} />
+                <StudentsTable studentsData={students} deleteStudent={deleteStudent } />
             </div>
         </>
 

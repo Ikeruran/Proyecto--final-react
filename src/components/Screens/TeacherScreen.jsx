@@ -18,7 +18,7 @@ function TeacherScreen() {
                         </li>
 
                         <li>
-                            <button onClick={deleteToken}>Logout</button>
+                        <Link to={"/"} onClick= {deleteToken}>Logout</Link>
                         </li>
                     </ul>
                 </nav>

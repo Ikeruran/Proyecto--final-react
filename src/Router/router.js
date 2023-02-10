@@ -9,7 +9,9 @@ import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute"
 import { createBrowserRouter, Form } from 'react-router-dom';
 import Users, {loader as usersLoader} from "../components/Users/Users";
 import Profile, {loader as profileLoader} from "../components/Profile/Profile"
-import SignIn from "../components/SignIn/SignIn";
+import SignUp from "../components/SignUp/SignUp";
+import { action as addStudentAction } from "../components/Users/UsersAdd";
+
 
 
 const router = createBrowserRouter([
@@ -42,12 +44,18 @@ const router = createBrowserRouter([
                                 path: "users",
                                 element: <Users />,
                                 loader:usersLoader,
+                               
 
                             },
                             {
-                                path: "users/signin",
-                                element: <SignIn/>
+                                path: "users/signup",
+                                element: <SignUp/>
                             },
+                            {
+                                path: "users/signup/addstudent",
+                                action: addStudentAction,
+                                errorElement: <div>Oops! There was an error.</div>,
+                              },
                             {
                                 path: "teachers",
                                 element: <Teachers/>,
@@ -58,7 +66,7 @@ const router = createBrowserRouter([
                                 element: <Students />,
                                 loader:studentsLoader,
                                 errorElement:<h1>Este profesor no tiene estudiantes asociados</h1>
-                            }
+                            },
 
 
                         ]

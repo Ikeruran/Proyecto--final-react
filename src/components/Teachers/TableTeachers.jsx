@@ -29,7 +29,7 @@ function TableBody(props){
                 <td>{row.last_name}</td>
                 <td>{convertDate(row.date_of_birth)}</td>
                 <td>{convertDate(row.createdAt)}</td>
-                <td><button onClick={()=>props.removePeople(index)} >Delete</button></td>
+                <td><button onClick={()=>props.deleteTeacher(row.id)} >Delete</button></td>
             </tr >   
         )
 })
@@ -42,7 +42,7 @@ function UsersTable(props){
     return(
         <table>
         <TableHeader/>
-        <TableBody teacherData={props.teacherData}/>
+        <TableBody teacherData={props.teacherData} deleteTeacher={props.deleteTeacher }/>
         </table>
         
     )

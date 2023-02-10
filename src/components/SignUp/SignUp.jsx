@@ -1,12 +1,15 @@
 
-import { Form, useLoaderData, redirect, useNavigate, } from "react-router-dom";
+import { Form, redirect} from "react-router-dom";
 
-export default function SingIn() {
+import React from 'react';
 
-  const navigate = useNavigate()
 
+
+export default function SingUp() {
+
+  
   return (
-    <Form method="post" id="contact-form">
+    <Form method="post" id="contact-form" action="addstudent">
 
       {/* <span>Email</span> */}
       <p>
@@ -16,7 +19,7 @@ export default function SingIn() {
           aria-label="First name"
           type="text"
           name="email"
-          defaultValue={""}
+          
         />
 
         <input
@@ -25,9 +28,19 @@ export default function SingIn() {
           aria-label="Last name"
           type="text"
           name="password"
-          defaultValue={""}
+          
+        />
+         
+        <input
+          className="casillas"
+          placeholder="DNI"
+          aria-label="Last name"
+          type="text"
+          name="dni"
+          
         />
       </p>
+
       <p>
         <input
           className="casillas"
@@ -35,7 +48,7 @@ export default function SingIn() {
           aria-label="Last name"
           type="text"
           name="name"
-          defaultValue={""}
+          
         />
 
         <input
@@ -43,8 +56,8 @@ export default function SingIn() {
           placeholder="Last Name"
           aria-label="Last name"
           type="text"
-          name="last"
-          defaultValue={""}
+          name="last_name"
+          
         />
       </p>
 
@@ -53,19 +66,14 @@ export default function SingIn() {
         placeholder="Date of Birth"
         aria-label="Last name"
         type="date"
-        name="date"
-        defaultValue={""}
+        name="date_of_birth"
+        
       />
 
-
-
-
-
-
       <p>
-        <button type="submit">Save</button>
+        <button type="submit" >Save</button>
         <button type="button" onClick={() => {
-          navigate(-1);
+          redirect(-1);
         }}>Cancel</button>
       </p>
     </Form>

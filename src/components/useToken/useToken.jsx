@@ -17,10 +17,15 @@ export default function useToken(){
         
     };
 
+    function navigateBack(){
+        navigateBack(-1)
+    }
+        
     const deleteToken = ()=>{
         localStorage.removeItem("token")
         setToken(null)
-        window.location.reload()
+        navigateBack()
+        
     }
 
     return{

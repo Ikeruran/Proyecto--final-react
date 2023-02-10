@@ -35,6 +35,25 @@ export default function Teachers() {
     const users = useLoaderData()
     
     const [teachers, setTeachers] = useState(users)
+
+    async function deleteTeacher(id){
+        const token = getToken()
+        const url = `https://localhost:1443/api/teacher/${id}`;
+        const options = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + token,
+            },
+        }
+        let usersApi = await fetch(url, options);
+        usersApi = await usersApi.json();
+        if(usersApi.success){
+        const newUsers = users.filter(user=>user.id !==id)
+        setTeachers(newUsers)}
+    }
+
+
     
 
     
@@ -43,7 +62,7 @@ export default function Teachers() {
 
     return (
         <div className="container">
-        <TableTeachers teacherData={teachers} title={title}/>
+        <TableTeachers teacherData={teachers} title={title} deleteTeacher={deleteTeacher }/>
         </div>
 
     )
