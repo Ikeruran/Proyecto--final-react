@@ -16,9 +16,7 @@ function AdminScreen() {
                         <li>
                             <Link to={"./users"}>Users</Link>
                         </li>
-                        <li>
-                            <Link to={"./students"}>Students</Link>
-                        </li>
+                        
                         <li>
                             <Link to={"./teachers"}>Teachers</Link>
                         </li>

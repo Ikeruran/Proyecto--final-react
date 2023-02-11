@@ -1,13 +1,12 @@
 import { redirect } from "react-router-dom";
-import { getToken, decodedToken } from "../../utils"
+import { getToken,getTeacherId } from "../../utils"
 
 
 
 async function action({ request }) {
 
     const token = getToken()
-    const decoded = await decodedToken(token)
-    const id = decoded.user.id
+    const id = await getTeacherId()
 
 
     const formData = await request.formData();

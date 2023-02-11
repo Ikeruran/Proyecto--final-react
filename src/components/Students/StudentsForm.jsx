@@ -40,7 +40,6 @@ export default function StudentsForm() {
         />
       </p>
 
-
       <input
         className="casillas"
         placeholder="Date of Birth"

@@ -20,4 +20,28 @@ function convertDate(rawDate) {
     return dateWithFormat
 }
 
-export { convertDate, getToken, decodedToken}
+
+async function getTeacherId() {
+
+    const token = getToken()
+    const decoded = await decodedToken(token)
+    const id = decoded.user.id
+
+    const url = "https://localhost:1443/api/user/" + id;
+    const options = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token,
+        },
+    }
+
+    let usersApi = await fetch(url, options);
+    const users = await usersApi.json();
+    const teacherId= users.teacher.id
+    return teacherId
+
+
+}
+
+export { convertDate, getToken, decodedToken,getTeacherId}

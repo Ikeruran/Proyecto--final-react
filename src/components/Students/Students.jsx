@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import StudentsTable from "./StudentsTable"
 import { useLoaderData, Link } from "react-router-dom"
-import { getToken, decodedToken } from "../../utils"
+import { getToken,getTeacherId } from "../../utils"
 
 
 export async function loader() {
 
     const token = getToken()
-    const decoded = await decodedToken(token)
-    const id = decoded.user.id
+    const id = await getTeacherId()
+
+   
 
     const url = "https://localhost:1443/api/teacher/" + id + "/students";
     const options = {
