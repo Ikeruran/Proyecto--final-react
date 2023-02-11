@@ -1,47 +1,26 @@
-
 import { Form, redirect} from "react-router-dom";
 
 import React from 'react';
 
 
 
-export default function SingUp() {
+export default function StudentsForm() {
 
   
   return (
-    <Form method="post" id="contact-form" action="usersadd">
+    <Form method="post" id="contact-form" action="studentsform">
 
       
       <p>
         <input
           className="casillas"
-          placeholder="Email"
-          aria-label="First name"
-          type="text"
-          name="email"
-          
-        />
-
-        <input
-          className="casillas"
-          placeholder="Password"
-          aria-label="Last name"
-          type="text"
-          name="password"
-          
-        />
-         
-        <input
-          className="casillas"
           placeholder="DNI"
-          aria-label="Last name"
+          aria-label="First name"
           type="text"
           name="dni"
           
         />
-      </p>
 
-      <p>
         <input
           className="casillas"
           placeholder="Name"
@@ -50,7 +29,7 @@ export default function SingUp() {
           name="name"
           
         />
-
+         
         <input
           className="casillas"
           placeholder="Last Name"
@@ -60,6 +39,7 @@ export default function SingUp() {
           
         />
       </p>
+
 
       <input
         className="casillas"

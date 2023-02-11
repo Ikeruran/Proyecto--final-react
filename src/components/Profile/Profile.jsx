@@ -62,6 +62,7 @@ export default function Profile() {
                     <p> <b>Name: </b> {profile?.teacher.name}</p>
                     <p> <b>Last Name: </b> {profile?.teacher.last_name}</p>
                     <p> <b>DNI: </b> {profile?.teacher.dni}</p>
+                    <p> <b>ID: </b> {profile?.teacher.id}</p>
                     <p><b>Fecha de nacimiento: </b>{convertDate(profile?.teacher.date_of_birth)}</p>
                 </div>
 

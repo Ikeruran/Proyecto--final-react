@@ -3,6 +3,11 @@ import {useState} from "react";
 import { useJwt } from "react-jwt"
 import {getToken} from "../../utils"
 
+
+
+
+
+
 export default function useToken(){
 
     
@@ -16,15 +21,21 @@ export default function useToken(){
         setToken(userToken?.token)
         
     };
-
-    function navigateBack(){
-        navigateBack(-1)
-    }
+    
+      
+   
+    
+   
         
     const deleteToken = ()=>{
         localStorage.removeItem("token")
         setToken(null)
-        navigateBack()
+        window.location.assign("/")
+        
+        
+        
+        
+       
         
     }
 

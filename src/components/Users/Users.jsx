@@ -1,6 +1,6 @@
 
 import UsersTable from "./UsersTable"
-import { useLoaderData, Link, useActionData} from "react-router-dom"
+import { useLoaderData, Link} from "react-router-dom"
 import React, { useState } from 'react';
 import { getToken} from "../../utils"
 
@@ -60,12 +60,8 @@ function Users() {
 
     const users = useLoaderData()
 
-    const userAdded = useActionData()
-
-
-
     
-   
+
     const [people, setPeople] = useState(users)
 
     

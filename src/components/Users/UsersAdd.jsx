@@ -6,7 +6,8 @@ import { redirect } from "react-router-dom";
   
   const formData = await request.formData();
   const fields = Object.fromEntries(formData);
-  let user = await fetch("https://localhost:1443/signup", {
+  const url ="https://localhost:1443/signup"
+  const options= {
     method: "POST",
     headers: { "Content-Type": "application/json",
  
@@ -20,7 +21,8 @@ import { redirect } from "react-router-dom";
       date_of_birth: fields.date_of_birth,
      
     })
-  })
+  }
+  let user = await fetch( url, options)
   console.log(user)
   // user = await user.json();
   return redirect("/users");

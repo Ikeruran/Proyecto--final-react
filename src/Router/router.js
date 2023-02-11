@@ -6,12 +6,13 @@ import Teachers, {loader as teachersLoader} from "../components/Teachers/Teacher
 import Students, {loader as studentsLoader} from "../components/Students/Students"
 import Error from "../components/Error/Error"
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute"
-import { createBrowserRouter, Form } from 'react-router-dom';
+import { createBrowserRouter} from 'react-router-dom';
 import Users, {loader as usersLoader} from "../components/Users/Users";
 import Profile, {loader as profileLoader} from "../components/Profile/Profile"
 import SignUp from "../components/SignUp/SignUp";
-import { action as addStudentAction } from "../components/Users/UsersAdd";
-
+import { action as addUserAction } from "../components/Users/UsersAdd";
+import {action as addStudentsAction} from "../components/Students/StudentsAddForm"
+import StudentsForm from "../components/Students/StudentsForm";
 
 
 const router = createBrowserRouter([
@@ -52,8 +53,8 @@ const router = createBrowserRouter([
                                 element: <SignUp/>
                             },
                             {
-                                path: "users/signup/addstudent",
-                                action: addStudentAction,
+                                path: "users/signup/usersadd",
+                                action: addUserAction,
                                 errorElement: <div>Oops! There was an error.</div>,
                               },
                             {
@@ -61,6 +62,17 @@ const router = createBrowserRouter([
                                 element: <Teachers/>,
                                 loader: teachersLoader,
                             },
+                            {
+                                path: "students/students",
+                                element: <StudentsForm/>
+                            },
+                            {
+                                path: "students/students/studentsform",
+                                action: addStudentsAction,
+                                errorElement: <div>Oops! There was an error.</div>,
+                              },
+
+                            
                             {
                                 path: "students",
                                 element: <Students />,

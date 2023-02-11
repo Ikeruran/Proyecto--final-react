@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import StudentsTable from "./StudentsTable"
-import { useLoaderData } from "react-router-dom"
+import { useLoaderData, Link } from "react-router-dom"
 import { getToken, decodedToken } from "../../utils"
 
 
@@ -70,6 +70,7 @@ function Students() {
             {title}
             <div className="container">
                 <StudentsTable studentsData={students} deleteStudent={deleteStudent } />
+                <Link to={"./students"}><button className= "botones" > Add Students</button></Link>
             </div>
         </>
 

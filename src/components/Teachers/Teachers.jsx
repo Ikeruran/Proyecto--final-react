@@ -63,6 +63,7 @@ export default function Teachers() {
     return (
         <div className="container">
         <TableTeachers teacherData={teachers} title={title} deleteTeacher={deleteTeacher }/>
+        
         </div>
 
     )
