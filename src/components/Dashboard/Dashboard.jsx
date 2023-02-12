@@ -5,22 +5,15 @@ import AdminScreen from "../Screens/AdminScreen"
 import TeacherScreen from "../Screens/TeacherScreen"
 import {getToken} from "../../utils"
 
-
-
-
 function Dashboard() {
-
-  
 
     const { setToken, isExpired, decodedToken} = useToken()
     const token= getToken()
    
-    
     if (!token || isExpired) {
         return (
             <>
                 <Login setToken={setToken} />
-
             </>
         )
     }
@@ -35,7 +28,6 @@ function Dashboard() {
             <TeacherScreen/>
         )
     }
-
 }
 
 export default Dashboard

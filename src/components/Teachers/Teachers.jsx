@@ -37,6 +37,7 @@ export default function Teachers() {
     const [teachers, setTeachers] = useState(users)
 
     async function deleteTeacher(id){
+        try {
         const token = getToken()
         const url = `https://localhost:1443/api/teacher/${id}`;
         const options = {
@@ -47,11 +48,18 @@ export default function Teachers() {
             },
         }
         let usersApi = await fetch(url, options);
+        if (!usersApi.ok) {
+            throw new Error(`A teacher with students associated can not be deleted`)
+        }
         usersApi = await usersApi.json();
         if(usersApi.success){
         const newUsers = users.filter(user=>user.id !==id)
         setTeachers(newUsers)}
+    }catch (error) {
+        console.error(error)
+        alert("Error: " + error.message)
     }
+}
 
 
     

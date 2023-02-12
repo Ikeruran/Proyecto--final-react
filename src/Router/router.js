@@ -5,7 +5,6 @@ import Index from "../components/Index/Index";
 import Teachers, {loader as teachersLoader} from "../components/Teachers/Teachers"
 import Students, {loader as studentsLoader} from "../components/Students/Students"
 import Error from "../components/Error/Error"
-import ErrorNotStudents from "../components/Error/ErrorNotStudents";
 import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute"
 import { createBrowserRouter} from 'react-router-dom';
 import Users, {loader as usersLoader} from "../components/Users/Users";
@@ -56,7 +55,7 @@ const router = createBrowserRouter([
                             {
                                 path: "users/signup/usersadd",
                                 action: addUserAction,
-                                errorElement: <div>Oops! There was an error.</div>,
+                                
                               },
                             {
                                 path: "teachers",
@@ -70,7 +69,7 @@ const router = createBrowserRouter([
                             {
                                 path: "students/students/studentsform",
                                 action: addStudentsAction,
-                                errorElement: <div>Oops! There was an error.</div>,
+                                
                               },
 
                             
@@ -78,7 +77,7 @@ const router = createBrowserRouter([
                                 path: "students",
                                 element: <Students />,
                                 loader:studentsLoader,
-                                errorElement:<h1>No eres profesor por lo que no tienes alumnos asociados</h1>
+                                
                             },
 
 

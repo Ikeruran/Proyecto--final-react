@@ -66,20 +66,29 @@ function Users() {
 
     
     async function deleteUser(id){
-        const token = getToken()
-        const url = `https://localhost:1443/api/user/${id}`;
-        const options = {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + token,
-            },
+        try {
+            const token = getToken()
+            const url = `https://localhost:1443/api/user/${id}`;
+            const options = {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + token,
+                },
+            }
+            let usersApi = await fetch(url, options);
+            
+            if (!usersApi.ok) {
+                throw new Error(`A user with a teacher associated can not be deleted`)
+            }
+            usersApi = await usersApi.json();
+            if(usersApi.success){
+            const newUsers = users.filter(user=>user.id !==id)
+            setPeople(newUsers)}
+        } catch (error) {
+            console.error(error)
+            alert("Error: " + error.message)
         }
-        let usersApi = await fetch(url, options);
-        usersApi = await usersApi.json();
-        if(usersApi.success){
-        const newUsers = users.filter(user=>user.id !==id)
-        setPeople(newUsers)}
     }
 
    
