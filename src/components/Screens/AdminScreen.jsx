@@ -16,15 +16,12 @@ function AdminScreen() {
                         <li>
                             <Link to={"./users"}>Users</Link>
                         </li>
-                        
+
                         <li>
                             <Link to={"./teachers"}>Teachers</Link>
                         </li>
-
-
-
                         <li>
-                        <Link to={"/"} onClick= {deleteToken}>Logout</Link>
+                            <Link to={"/"} onClick={deleteToken}>Logout</Link>
                         </li>
                     </ul>
                 </nav>

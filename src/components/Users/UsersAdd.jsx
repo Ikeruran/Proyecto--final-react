@@ -24,8 +24,16 @@ import { redirect } from "react-router-dom";
   }
   let user = await fetch( url, options)
   console.log(user)
-  // user = await user.json();
+  if (user.statusText==="Bad Request"){
+    alert("Fill all the fields with the correct data")
+    return redirect("/users");
+  }else if(user.statusText==="Unprocessable Entity"){
+    alert("This user already exists")
+    return redirect("/users");
+  }
+  else{
   return redirect("/users");
+  }
   
 }
 export{action}

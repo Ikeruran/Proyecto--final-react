@@ -14,10 +14,7 @@ import { action as addUserAction } from "../components/Users/UsersAdd";
 import {action as addStudentsAction} from "../components/Students/StudentsAddForm"
 import StudentsForm from "../components/Students/StudentsForm";
 
-
 const router = createBrowserRouter([
-
-
 
     {
         path: "/",
@@ -37,16 +34,12 @@ const router = createBrowserRouter([
                             {
                                 path: "profile",
                                 element: <Profile />,
-                                loader: profileLoader,
-
-                                
+                                loader: profileLoader,  
                             },
                             {
                                 path: "users",
                                 element: <Users />,
                                 loader:usersLoader,
-                               
-
                             },
                             {
                                 path: "users/signup",
@@ -54,8 +47,7 @@ const router = createBrowserRouter([
                             },
                             {
                                 path: "users/signup/usersadd",
-                                action: addUserAction,
-                                
+                                action: addUserAction,                               
                               },
                             {
                                 path: "teachers",
@@ -68,35 +60,21 @@ const router = createBrowserRouter([
                             },
                             {
                                 path: "students/students/studentsform",
-                                action: addStudentsAction,
-                                
+                                action: addStudentsAction,                              
                               },
-
-                            
                             {
                                 path: "students",
                                 element: <Students />,
-                                loader:studentsLoader,
-                                
+                                loader:studentsLoader, 
+                                errorElement:<h1>This user is not a teacher</h1>
+
                             },
-
-
                         ]
-
                     }
-
-
                 ]
-
             }
         ]
     },
 ])
-
-
-// const [token, setToken] = useState();
-
-// if(!token) {
-//   return <Login setToken={setToken} />
 
 export default router

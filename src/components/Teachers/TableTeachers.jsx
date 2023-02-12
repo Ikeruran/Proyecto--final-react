@@ -1,7 +1,7 @@
 import React from "react"
 import { convertDate } from "../../utils"
 
-function TableHeader () {
+function TableHeader() {
     return (
         <thead>
             <tr>
@@ -18,8 +18,7 @@ function TableHeader () {
     )
 };
 
-function TableBody(props){
-
+function TableBody(props) {
     const rows = props.teacherData.map((row, index) => {
         return (
             <tr key={row.id}>
@@ -29,22 +28,19 @@ function TableBody(props){
                 <td>{row.last_name}</td>
                 <td>{convertDate(row.date_of_birth)}</td>
                 <td>{convertDate(row.createdAt)}</td>
-                <td><button onClick={()=>props.deleteTeacher(row.id)} >Delete</button></td>
-            </tr >   
+                <td><button onClick={() => props.deleteTeacher(row.id)} >Delete</button></td>
+            </tr >
         )
-})
-return <tbody>{rows}</tbody>
-
+    })
+    return <tbody>{rows}</tbody>
 }
 
-
-function UsersTable(props){
-    return(
+function UsersTable(props) {
+    return (
         <table>
-        <TableHeader/>
-        <TableBody teacherData={props.teacherData} deleteTeacher={props.deleteTeacher }/>
+            <TableHeader />
+            <TableBody teacherData={props.teacherData} deleteTeacher={props.deleteTeacher} />
         </table>
-        
     )
 }
 

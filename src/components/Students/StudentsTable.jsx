@@ -17,10 +17,7 @@ function TableHeader() {
 };
 
 function TableBody(props) {
-
     const rows = props.studentsData.map((row, index) => {
-
-        
 
         return (
             <tr key={row.id}>
@@ -34,18 +31,14 @@ function TableBody(props) {
         )
     })
     return <tbody>{rows}</tbody>
-
 }
-
 
 function UsersTable(props) {
     return (
         <table>
             <TableHeader />
-            <TableBody studentsData={props.studentsData} deleteStudent={props.deleteStudent }  />
+            <TableBody studentsData={props.studentsData} deleteStudent={props.deleteStudent} />
         </table>
-
     )
 }
-
 export default UsersTable

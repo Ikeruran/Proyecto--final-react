@@ -4,9 +4,7 @@ import { useLoaderData } from "react-router-dom"
 import { getToken } from "../../utils"
 
 export async function loader() {
-
     const token = getToken()
-
     const url = "https://localhost:1443/api/teacher/";
     const options = {
         method: "GET",
@@ -31,47 +29,38 @@ export async function loader() {
 }
 
 export default function Teachers() {
-
     const users = useLoaderData()
-    
     const [teachers, setTeachers] = useState(users)
-
-    async function deleteTeacher(id){
+    async function deleteTeacher(id) {
         try {
-        const token = getToken()
-        const url = `https://localhost:1443/api/teacher/${id}`;
-        const options = {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: "Bearer " + token,
-            },
+            const token = getToken()
+            const url = `https://localhost:1443/api/teacher/${id}`;
+            const options = {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + token,
+                },
+            }
+            let usersApi = await fetch(url, options);
+            if (!usersApi.ok) {
+                throw new Error(`A teacher with students associated can not be deleted`)
+            }
+            usersApi = await usersApi.json();
+            if (usersApi.success) {
+                const newUsers = users.filter(user => user.id !== id)
+                setTeachers(newUsers)
+            }
+        } catch (error) {
+            console.error(error)
+            alert("Error: " + error.message)
         }
-        let usersApi = await fetch(url, options);
-        if (!usersApi.ok) {
-            throw new Error(`A teacher with students associated can not be deleted`)
-        }
-        usersApi = await usersApi.json();
-        if(usersApi.success){
-        const newUsers = users.filter(user=>user.id !==id)
-        setTeachers(newUsers)}
-    }catch (error) {
-        console.error(error)
-        alert("Error: " + error.message)
     }
-}
 
-
-    
-
-    
-    const title= <h1>All Teachers</h1>
-
-
+    const title = <h1>All Teachers</h1>
     return (
         <div className="container">
-        <TableTeachers teacherData={teachers} title={title} deleteTeacher={deleteTeacher }/>
-        
+            <TableTeachers teacherData={teachers} title={title} deleteTeacher={deleteTeacher} />
         </div>
 
     )

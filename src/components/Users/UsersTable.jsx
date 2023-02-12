@@ -1,9 +1,6 @@
 import React from "react"
 
-
-
-
-function TableHeader () {
+function TableHeader() {
     return (
         <thead>
             <tr>
@@ -17,7 +14,7 @@ function TableHeader () {
     )
 };
 
-function TableBody(props){
+function TableBody(props) {
 
     const rows = props.peopleData.map((row, index) => {
         return (
@@ -25,23 +22,20 @@ function TableBody(props){
                 <td>{row.id}</td>
                 <td>{row.email}</td>
                 <td>{row.type}</td>
-                <td>{row.active? "active": "inactive"}</td>
-                <td><button onClick={()=>props.deleteUser(row.id)} >Delete</button></td>
-            </tr >   
+                <td>{row.active ? "active" : "inactive"}</td>
+                <td><button onClick={() => props.deleteUser(row.id)} >Delete</button></td>
+            </tr >
         )
-})
-return <tbody>{rows}</tbody>
-
+    })
+    return <tbody>{rows}</tbody>
 }
 
-
-function UsersTable(props){
-    return(
+function UsersTable(props) {
+    return (
         <table>
-        <TableHeader/>
-        <TableBody peopleData={props.peopleData} deleteUser= {props.deleteUser}/>
+            <TableHeader />
+            <TableBody peopleData={props.peopleData} deleteUser={props.deleteUser} />
         </table>
-        
     )
 }
 

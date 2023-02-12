@@ -6,7 +6,6 @@ import TeacherScreen from "../Screens/TeacherScreen"
 import {getToken} from "../../utils"
 
 function Dashboard() {
-
     const { setToken, isExpired, decodedToken} = useToken()
     const token= getToken()
    
@@ -17,7 +16,6 @@ function Dashboard() {
             </>
         )
     }
-
     let type = decodedToken.user.type
     if (type === "admin") {
         return (

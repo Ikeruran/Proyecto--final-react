@@ -4,8 +4,6 @@ import { useLoaderData } from "react-router-dom"
 import "./Profile.css"
 import { getToken, convertDate, decodedToken } from "../../utils"
 
-
-
 export async function loader() {
 
     const token = getToken()
@@ -20,20 +18,15 @@ export async function loader() {
             Authorization: "Bearer " + token,
         },
     }
-
     let usersApi = await fetch(url, options);
     const users = await usersApi.json();
     return users
-
-
 }
 
 export default function Profile() {
 
     const users = useLoaderData()
     const [profile, setProfile] = useState(users)
-
-
 
     function UserData() {
 
@@ -45,13 +38,9 @@ export default function Profile() {
                     <p> <b>Type: </b> {profile.type}</p>
                     <p> <b>Status: </b> {profile.active ? "active" : "inactive"}</p>
                 </div>
-
             </div>
-
-
         )
     }
-
 
     function TeacherData() {
 
@@ -65,9 +54,7 @@ export default function Profile() {
                     <p> <b>ID: </b> {profile?.teacher.id}</p>
                     <p><b>Fecha de nacimiento: </b>{convertDate(profile?.teacher.date_of_birth)}</p>
                 </div>
-
             </div>
-
         )
     }
 
@@ -81,6 +68,5 @@ export default function Profile() {
     } else {
         return <UserData />
     }
-
 }
 
